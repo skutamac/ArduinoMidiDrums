@@ -30,6 +30,14 @@
 #define KICK_THRESHOLD 50
 #define START_SLOT 0     //first analog slot of piezos
 
+//Piezo scaling defines
+#define SNARE_SCALE 20    //    100 is 100% of raw value - that is no scaling
+#define LTOM_SCALE 50     //  < 100 scales the velocity down so that you have to hit harder to get maximum velocity
+#define RTOM_SCALE 50     //  > 100 scales the velocity up so you get maximum velocity with softer hits
+#define LCYM_SCALE 50
+#define RCYM_SCALE 50
+#define KICK_SCALE 100
+
 //MIDI note defines for each trigger
 #define SNARE_NOTE 70
 #define LTOM_NOTE 71
@@ -100,6 +108,13 @@ void setup()
   thresholdMap[3] = LCYM_THRESHOLD;
   thresholdMap[4] = SNARE_THRESHOLD;
   thresholdMap[5] = LTOM_THRESHOLD;  
+
+  velScale[0] = KICK_SCALE;
+  velScale[1] = RTOM_SCALE;
+  velScale[2] = LCYM_SCALE;
+  velScale[3] = LCYM_SCALE;
+  velScale[4] = SNARE_SCALE;
+  velScale[5] = LTOM_SCALE;
   
   noteMap[0] = KICK_NOTE;
   noteMap[1] = RTOM_NOTE;
@@ -187,7 +202,7 @@ void recordNewPeak(short slot, short newPeak)
   {
     noteReady[slot] = true;
     if(newPeak > noteReadyVelocity[slot])
-      noteReadyVelocity[slot] = newPeak;
+      noteReadyVelocity[slot] = newPeak * velScale[slot] / 100;
   }
   else if(newPeak < prevPeak && noteReady[slot])
   {
