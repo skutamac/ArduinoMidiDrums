@@ -37,6 +37,7 @@
 #define LCYM_SCALE 50
 #define RCYM_SCALE 50
 #define KICK_SCALE 100
+#define unsigned short velScale[NUM_PIEZOS];
 
 //MIDI note defines for each trigger
 #define SNARE_NOTE 70
