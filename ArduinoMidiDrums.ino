@@ -37,7 +37,6 @@
 #define LCYM_SCALE 50
 #define RCYM_SCALE 50
 #define KICK_SCALE 100
-#define unsigned short velScale[NUM_PIEZOS];
 
 //MIDI note defines for each trigger
 #define SNARE_NOTE 70
@@ -67,6 +66,9 @@ unsigned short slotMap[NUM_PIEZOS];
 
 //map that holds the respective note to each piezo
 unsigned short noteMap[NUM_PIEZOS];
+
+//map that holds the respective scales for each pad
+unsigned short velScale[NUM_PIEZOS];
 
 //map that holds the respective threshold to each piezo
 unsigned short thresholdMap[NUM_PIEZOS];
